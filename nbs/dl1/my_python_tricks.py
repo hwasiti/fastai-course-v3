@@ -39,6 +39,10 @@ class NotificationCallback(Callback):
         message = str(epoch) + ": " + f"{smooth_loss.item():.4f}" + " , " + f"{val_loss:.4f}" + " , " + f"{accuracy:.4f}"
         notify_me(message)
         return False # Haider: if return true it will stop training at this point
+        
+learn = create_cnn(data, models.resnet34, metrics=error_rate)
+notif_cb = NotificationCallback()
+learn.fit_one_cycle(4, callbacks=[notif_cb])
 
 '''
 
