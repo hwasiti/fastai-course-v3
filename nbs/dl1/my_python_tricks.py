@@ -81,3 +81,29 @@ def plots(ims, figsize=(12,6), columns=3, titles=None, fontsize=16): # ims = np.
 # imgs = np.array([mpimg.imread(path/'tests'/x) for x in files])
 
 # plots(imgs, figsize=(15,15),  columns=3, titles=files)
+
+
+
+# https://github.com/kasparlund/fastaiNotebooks/blob/master/show_transforms/show_transforms.ipynb
+def plotImageMosaic( ims, masks=None, titles=None, figSize=(12,12), imCM=None, mskCM=None ):
+    fig = plt.figure(figsize=figSize)
+    
+    nb    = len(ims)
+    nrows = int(np.sqrt(nb))
+    ncols = int(math.ceil(nb/nrows))
+
+    gs = gridspec.GridSpec(nrows, ncols=ncols, height_ratios=None if masks is None else (np.zeros(nrows)+ 2), 
+                           wspace=0.01, hspace=0.01 if titles is None else 0.2)
+    for i in range(nb):
+        inner = gridspec.GridSpecFromSubplotSpec(1 if masks is None else 2, 1,subplot_spec=gs[i], 
+                                                 wspace=0.01, hspace=0.01)
+        
+        ax = plt.subplot(inner[0])
+        ax.axis('off')
+        ax.imshow(ims[i],cmap=imCM)
+        if titles is not None: ax.set_title(titles[i])
+        
+        if masks is not None:
+            ax = plt.subplot(inner[1])
+            ax.axis('off')
+            ax.imshow(masks[i],cmap=mskCM)
