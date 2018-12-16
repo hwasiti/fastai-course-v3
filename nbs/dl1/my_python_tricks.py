@@ -52,7 +52,11 @@ import os
 import matplotlib.pyplot as plt
 
 def notify_me(message="Job's done!"):
-    filename = os.environ['HOME'] + '/.telegram'
+    if 'Windows' in os.environ['OS']:
+        filename = 'C:' + os.environ['HOMEPATH'] + '\\.telegram'
+    else:
+        filename = os.environ['HOME'] + '/.telegram'
+
     with open(filename) as f:
         json_blob = f.read()
         credentials = json.loads(json_blob)
