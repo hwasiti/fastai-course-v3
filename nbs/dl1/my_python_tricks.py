@@ -49,6 +49,7 @@ learn.fit_one_cycle(4, callbacks=[notif_cb])
 import telegram
 import json
 import sys
+import os
 import matplotlib.pyplot as plt
 
 def notify_me(message="Job's done!"):
