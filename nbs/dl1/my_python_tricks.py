@@ -48,11 +48,11 @@ learn.fit_one_cycle(4, callbacks=[notif_cb])
 
 import telegram
 import json
-import os
+import sys
 import matplotlib.pyplot as plt
 
 def notify_me(message="Job's done!"):
-    if 'Windows' in os.environ['OS']:
+    if 'win' in sys.platform:
         filename = 'C:' + os.environ['HOMEPATH'] + '\\.telegram'
     else:
         filename = os.environ['HOME'] + '/.telegram'
